@@ -13,12 +13,13 @@ mojao.module('autoComplete', ['ajax', function(ajax) {
 
 
     //filter data
-    function filterSuggest(key) {
+    function filterSuggest(key,dataset,exclude) {
+
             //from start //use[^] to nagated
             //cover Array to String to exclude tags and recover to Araay
-            var thisElem = this;
-            var currentDataString = thisElem.dataset.join(' ');
-            var tagsExcludeRegExp = new RegExp('(^|\\b)' + thisElem.tags.join('|') + '(\\b|$)', 'gi');
+
+            var currentDataString = dataset.join(' ');
+            var tagsExcludeRegExp = new RegExp('(^|\\b)' + exclude.join('|') + '(\\b|$)', 'gi');
             var result = currentDataString.replace(tagsExcludeRegExp, '');
 
             var currentData = result.split(' ');
@@ -72,10 +73,10 @@ mojao.module('autoComplete', ['ajax', function(ajax) {
 
 
             case 13: //enter
-                var keyArray = filterSuggest.bind(thisElem)(target.value);
+                var keyArray = filterSuggest(target.value,thisElem.dataset,thisElem.tags);
                 if (keyArray.length !== 0 && target.value.toUpperCase() === keyArray[0].toUpperCase()) {
 
-                    addTag.bind(thisElem)(filterSuggest.bind(thisElem)(target.value)[0]);
+                    addTag.bind(thisElem)(filterSuggest(target.value,thisElem.dataset,thisElem.tags)[0]);
                 }
                 evt.preventDefault();
                 break;
@@ -285,9 +286,10 @@ mojao.module('autoComplete', ['ajax', function(ajax) {
 
 
         targetInput.addEventListener('input', function(evt) {
-            var key = evt.currentTarget.value;
 
-            var keyArray = filterSuggest.bind(thisElem)(key);
+            var key = evt.currentTarget.value;
+            var thisElem=this;
+            var keyArray = filterSuggest(key,thisElem.dataset,thisElem.tags);
 
             if (keyArray.length !== 0) {
                 if (key !== '') {
