@@ -1,0 +1,118 @@
+//vars
+
+$tag-color: rgb(95, 95, 95)
+$tag-bg-color: rgb(235, 235, 235)
+$tag-bg-color-hover: #ffebb8
+$tag-remove-color-hover: #ff6c00
+$tag-remove-color: rgb(144, 144, 144)
+$tag-remove-postion: 0.5rem
+$tag-border-color: rgb(213, 213, 213)
+$border-color: rgb(198, 198, 198)
+$rounding: 0.25rem
+
+.autocomplete
+
+    display: block
+    padding: 0.2rem
+    border-radius: $rounding
+    border: 1px solid $border-color
+    font-size: 1rem
+    line-height: 1.5
+
+    &__taglist
+        position: relative
+        font-size: 0
+
+
+    &__tagitem
+        color: $tag-color
+        font-size: 1rem
+        position: relative
+        display: inline-block
+        overflow: hidden 
+        margin: 0 0.2em
+        padding: 0 ($tag-remove-postion*3) 0 0.4em        
+        line-height: 1.4
+        vertical-align: middle
+        color: rgb(0, 0, 0)
+        background: none $tag-bg-color
+        border-radius: $rounding
+        border: 1px solid $tag-border-color
+        cursor: default
+
+
+
+        &__remove
+           
+            color: $tag-remove-color
+
+            &:before            
+                content: "x"
+                position: absolute
+                cursor: pointer
+                top: 0
+                right: $tag-remove-postion
+            &:hover
+                color: $tag-remove-color-hover
+
+    &__inputitem
+        font-size: 1rem
+        position: relative
+        display: inline-block
+        min-width: 12em
+        vertical-align: middle
+
+    
+        
+
+    &__input
+        border: none
+        outline: none
+        line-height: 1.5
+        padding-left: 0.8em
+        
+
+    &__pseudo-input
+            
+        position: absolute            
+        display: inline-block
+        left: 0
+        pointer-events: none
+        // width: 100%
+        line-height: 1.5
+        padding-left: 0.8em
+        vertical-align: middle
+        color: $tag-remove-color
+        background-color: #fff
+        &.is-hide
+            display: none
+
+
+
+
+    &__suggest
+        position: absolute
+        padding: 0.8em 0
+        box-sizing: border-box
+        min-width: 100%
+        max-height: 12rem
+        background-color: #fff
+        border: 1px solid $border-color
+        border-radius: $rounding
+        overflow-y: auto
+        overflow-x: hidden
+        transform: translate3d(0,0,0) //hack
+        &.is-hide
+            display: none
+
+    &__suggest__list
+        outline: none
+        
+
+    &__suggest__listitem
+        display: block
+        padding: 0.4em 0.8em
+        cursor: pointer
+        &:hover,&:focus,&.is-selected
+            background-color: $tag-bg-color-hover
+            outline: none

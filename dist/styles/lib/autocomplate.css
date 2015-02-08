@@ -1,0 +1,97 @@
+.autocomplete {
+  display: block;
+  padding: 0.2rem;
+  border-radius: 0.25rem;
+  border: 1px solid #c6c6c6;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.autocomplete__taglist {
+  position: relative;
+  font-size: 0;
+}
+.autocomplete__tagitem {
+  color: #5f5f5f;
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0 0.2em;
+  padding: 0 1.5rem 0 0.4em;
+  line-height: 1.4;
+  vertical-align: middle;
+  color: black;
+  background: none #ebebeb;
+  border-radius: 0.25rem;
+  border: 1px solid #d5d5d5;
+  cursor: default;
+}
+.autocomplete__tagitem__remove {
+  color: #909090;
+}
+.autocomplete__tagitem__remove:before {
+  content: "x";
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0.5rem;
+}
+.autocomplete__tagitem__remove:hover {
+  color: #ff6c00;
+}
+.autocomplete__inputitem {
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  min-width: 12em;
+  vertical-align: middle;
+}
+.autocomplete__input {
+  border: none;
+  outline: none;
+  line-height: 1.5;
+  padding-left: 0.8em;
+}
+.autocomplete__pseudo-input {
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  pointer-events: none;
+  line-height: 1.5;
+  padding-left: 0.8em;
+  vertical-align: middle;
+  color: #909090;
+  background-color: white;
+}
+.autocomplete__pseudo-input.is-hide {
+  display: none;
+}
+.autocomplete__suggest {
+  position: absolute;
+  padding: 0.8em 0;
+  box-sizing: border-box;
+  min-width: 100%;
+  max-height: 12rem;
+  background-color: white;
+  border: 1px solid #c6c6c6;
+  border-radius: 0.25rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.autocomplete__suggest.is-hide {
+  display: none;
+}
+.autocomplete__suggest__list {
+  outline: none;
+}
+.autocomplete__suggest__listitem {
+  display: block;
+  padding: 0.4em 0.8em;
+  cursor: pointer;
+}
+.autocomplete__suggest__listitem:hover, .autocomplete__suggest__listitem:focus, .autocomplete__suggest__listitem.is-selected {
+  background-color: #ffebb8;
+  outline: none;
+}
