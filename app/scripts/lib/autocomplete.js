@@ -1,6 +1,6 @@
 'use strict';
 
-mojao.module('autoComplete', ['ajax', function(ajax) {
+mojao.module('autoComplete', ['ajax','filterSuggest', function(ajax,filterSuggest) {
 
     var autoComplete = {};
 
@@ -12,36 +12,8 @@ mojao.module('autoComplete', ['ajax', function(ajax) {
 
 
 
-    //filter data
-    function filterSuggest(key,dataset,exclude) {
-
-            //from start //use[^] to nagated
-            //cover Array to String to exclude tags and recover to Araay
-
-            var currentDataString = dataset.join(' ');
-            var tagsExcludeRegExp = new RegExp('(^|\\b)' + exclude.join('\\s*|') + '(\\b|$)', 'gi');
-            var result = currentDataString.replace(tagsExcludeRegExp, '');
-
-            var currentData = result.split(' ');
-
-            //Escape string for regex
-            key = key.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
-
-            var regex = new RegExp('^' + key, 'i');
-            var filtered = [];
-
-            for (var i = 0, k = currentData.length; i < k; i++) {
-
-                if (regex.test(currentData[i])) {
-                    filtered.push(currentData[i]);
-                }
-            }
-            //sort
-            filtered.sort();
-
-            return filtered;
-        }
-        //extend defaultvalue
+   
+    //extend defaultvalue
     function extend(defaultValue, optionValue) {
 
         optionValue = optionValue || {};
@@ -426,5 +398,48 @@ mojao.module('autoComplete', ['ajax', function(ajax) {
 
 
     return autoComplete;
+
+}]);
+
+
+
+
+
+mojao.module('filterSuggest', [ function() {
+
+
+     //filter data
+    var filterSuggest=function (key,dataset,exclude) {
+
+            //from start //use[^] to nagated
+            //cover Array to String to exclude tags and recover to Araay
+
+            var currentDataString = dataset.join(' ');
+            var tagsExcludeRegExp = new RegExp('(^|\\b)' + exclude.join('\\s*|') + '(\\b|$)', 'gi');
+            var result = currentDataString.replace(tagsExcludeRegExp, '');
+
+            var currentData = result.split(' ');
+
+            //Escape string for regex
+            key = key.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+
+            var regex = new RegExp('^' + key, 'i');
+            var filtered = [];
+
+            for (var i = 0, k = currentData.length; i < k; i++) {
+
+                if (regex.test(currentData[i])) {
+                    filtered.push(currentData[i]);
+                }
+            }
+            //sort
+            filtered.sort();
+
+            return filtered;
+}
+
+
+
+    return filterSuggest;
 
 }]);
