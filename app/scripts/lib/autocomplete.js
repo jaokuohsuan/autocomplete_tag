@@ -19,7 +19,7 @@ mojao.module('autoComplete', ['ajax', function(ajax) {
             //cover Array to String to exclude tags and recover to Araay
 
             var currentDataString = dataset.join(' ');
-            var tagsExcludeRegExp = new RegExp('(^|\\b)' + exclude.join('|') + '(\\b|$)', 'gi');
+            var tagsExcludeRegExp = new RegExp('(^|\\b)' + exclude.join('\\s*|') + '(\\b|$)', 'gi');
             var result = currentDataString.replace(tagsExcludeRegExp, '');
 
             var currentData = result.split(' ');
