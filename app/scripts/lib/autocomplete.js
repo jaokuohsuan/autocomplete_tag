@@ -16,33 +16,32 @@ mojao.module('autoComplete', ['ajax', function(ajax) {
     function filterSuggest(key,dataset,exclude) {
 
             //from start //use[^] to nagated
-            //cover Array to String to exclude tags and match
+            //cover Array to String to exclude tags and recover to Araay
 
             var currentDataString = dataset.join(' ');
-
-            //exclude tags
-            var tagsExcludeRegExp = new RegExp('(^|\\b)' + exclude.join('|') + '(\s*\\b|$)', 'gi');
+            var tagsExcludeRegExp = new RegExp('(^|\\b)' + exclude.join('|') + '(\\b|$)', 'gi');
             var result = currentDataString.replace(tagsExcludeRegExp, '');
- 
+
+            var currentData = result.split(' ');
 
             //Escape string for regex
             key = key.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 
-            //find match
-            var matchRegex=new RegExp('(^|\\b)'+key+'(\\S*\\b|$)', 'gi');
-            var found = result.match(matchRegex);
+            var regex = new RegExp('^' + key, 'i');
+            var filtered = [];
 
-            //sort
+            for (var i = 0, k = currentData.length; i < k; i++) {
 
-            if(found!==null){
-                found.sort();
-            }else{
-                found=[];
+                if (regex.test(currentData[i])) {
+                    filtered.push(currentData[i]);
+                }
             }
+            //sort
+            filtered.sort();
 
-            return found;
-    }
-    //extend defaultvalue
+            return filtered;
+        }
+        //extend defaultvalue
     function extend(defaultValue, optionValue) {
 
         optionValue = optionValue || {};
